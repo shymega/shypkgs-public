@@ -5,16 +5,16 @@ let
     owner = "wayland";
     repo = "wayland";
     rev = "1.23.1";
-    hash = "sha256-oK0Z8xO2ILuySGZS0m37ZF0MOyle2l8AXb0/6wai0/w=";
+    hash = "sha256-iNItt3XP70Y+bzsR2Hl+Lh4Cgh2LF1Ana9+zInLokkk=";
   };
 
   libdrm-git = pkgs.libdrm.overrideAttrs rec {
     pname = "libdrm";
     version = "2.4.123";
 
-    src = pkgs.fetchzip {
+    src = pkgs.fetchurl {
       url = "https://dri.freedesktop.org/${pname}/${pname}-${version}.tar.xz";
-      hash = "sha256-sSTpeg5jn30veyauz6aiLDTIui38TiswsX/gUgoipDY=";
+      hash = "sha256-ormFZ6FJp0sPUOkegl+cAxXYbnvpt0OU2uiymMqtt54=";
     };
   };
 
@@ -41,9 +41,9 @@ let
     pname = "wayland-protocols";
     version = "1.37";
 
-    src = pkgs.fetchzip {
+    src = pkgs.fetchurl {
       url = "https://gitlab.freedesktop.org/wayland/${pname}/-/releases/${version}/downloads/${pname}-${version}.tar.xz";
-      hash = "sha256-BtVk4Ml13vobxd7cELonsPwsbe42k9FTQJdqsb/qOmk=";
+      hash = "sha256-pw6b6STy6GiOaCTc6vYYj6rNWuIY36yNCj0JdiEe8yY=";
     };
   });
 
@@ -59,7 +59,7 @@ let
       owner = "wlroots";
       repo = "wlroots";
       rev = version;
-      hash = "sha256-GYlJXp6dFQgjJXc+T2Fs+1i7yuQjf5IM1+BWn+ivBOg=";
+      hash = "sha256-BlI3EUoGEHdO6IBh99o/Aadct2dd7Xjc4PG0Sv+flqI=";
     };
     buildInputs = oldAttrs.buildInputs ++ (with pkgs; [
       lcms2
