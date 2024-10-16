@@ -39,8 +39,8 @@
           pkgs = inputs.nixpkgs.legacyPackages.${system};
         in
         import ./pkgs { inherit system inputs pkgs; });
-      nixosModules = forAllSystems (system: import ./modules { inherit system inputs; });
-      hmModules = forAllSystems (system: import ./modules { inherit system inputs; });
+      nixosModules = forAllSystems (system: (import ./modules { inherit system inputs; }).nixosModules);
+      hmModules = forAllSystems (system: (import ./modules { inherit system inputs; }).hmModules);
 
       # for `nix fmt`
       formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.system}.config.build.wrapper);
