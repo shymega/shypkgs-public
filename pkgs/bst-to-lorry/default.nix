@@ -3,18 +3,9 @@
   pkgs,
   fetchFromGitLab,
   python3Packages,
+  buildstream2,
 }: let
   inherit (python3Packages) buildPythonApplication;
-  buildstream2 = (pkgs.callPackage ../buildstream/buildstream-v2.nix {}).overrideAttrs (oldAttrs: {
-    propagatedBuildInputs =
-      oldAttrs.propagatedBuildInputs
-      ++ (with pkgs.python3Packages; [
-        dulwich
-        packaging
-        requests
-        tomlkit
-      ]);
-  });
 in
   buildPythonApplication rec {
     pname = "bst-to-lorry";
@@ -24,7 +15,7 @@ in
     src = fetchFromGitLab {
       owner = "CodethinkLabs/lorry";
       repo = "bst-to-lorry";
-      rev = "main";
+      rev = "e1734575d7333406056aeaef739099588125fb7c";
       hash = "sha256-vQnMqj5Woi7xpLrFNFXMVoJBKCT096TnLSlecRm1YMk=";
     };
 
