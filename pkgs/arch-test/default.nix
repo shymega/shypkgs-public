@@ -3,7 +3,6 @@
   stdenv,
   fetchFromGitHub,
   lib,
-  inputs,
   buildWin32 ? false,
   buildWin64 ? false,
   buildPPC64 ? false,
@@ -20,7 +19,7 @@
   pkgsCrossBase = pkgs.pkgsCross;
   inherit (stdenv) mkDerivation;
   inherit (lib) optionals optionalString concatStringsSep;
-  inherit (inputs.nixpkgs-master.lib.strings) trim;
+  inherit (lib.strings) trim;
 
   pkgsCross =
     optionals (pkgsCrossBase != null) []
