@@ -17,13 +17,13 @@
     inherit (pkgs) pkgsCross;
   in
     assert pkgsCross != null;
-    optionals buildPPC64 (with pkgsCross.ppc64; [gcc binutils])
-    ++ optionals buildArm64 (with pkgsCross.aarch64-multiplatform; [gcc binutils])
-    ++ optionals buildM68k (with pkgsCross.m68k; [gcc binutils])
-    ++ optionals buildMips (with pkgsCross.mips-linux-gnu; [gcc binutils])
-    ++ optionals buildRiscv64 (with pkgsCross.riscv64; [gcc binutils])
-    ++ optionals buildRiscv32 (with pkgsCross.riscv32; [gcc binutils])
-    ++ optionals buildAmd64 (with pkgs; [gcc binutils]);
+      optionals buildPPC64 (with pkgsCross.ppc64; [gcc binutils])
+      ++ optionals buildArm64 (with pkgsCross.aarch64-multiplatform; [gcc binutils])
+      ++ optionals buildM68k (with pkgsCross.m68k; [gcc binutils])
+      ++ optionals buildMips (with pkgsCross.mips-linux-gnu; [gcc binutils])
+      ++ optionals buildRiscv64 (with pkgsCross.riscv64; [gcc binutils])
+      ++ optionals buildRiscv32 (with pkgsCross.riscv32; [gcc binutils])
+      ++ optionals buildAmd64 (with pkgs; [gcc binutils]);
 
   makeTargetArchs = let
     inherit (lib) optionalString concatStringsSep;
