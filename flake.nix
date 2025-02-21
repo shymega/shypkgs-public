@@ -21,7 +21,6 @@
     genPkgs = system:
       import inputs.nixpkgs {
         inherit system;
-        overlays = builtins.attrValues self.overlays;
         config = self.nixpkgs-config;
       };
 
@@ -83,24 +82,8 @@
       allowBroken = true;
       allowInsecurePredicate = _: true;
     };
-    overlays.default = final: _: {
-      # FIXME: Map over attrset.
-      inherit
-        (self.packages.${final.system})
-        arch-test
-        bst-to-lorry
-        buildbox
-        buildstream1
-        buildstream2
-        dwl
-        email-gitsync
-        is-net-metered
-        isync-exchange-patched
-        offlineimap-patched
-        wl-screen-share
-        wl-screen-share-stop
-        wm-menu
-        ;
-    };
+    overlays.default = final: _: let
+      packages = self.packages.${final.system};
+    in with builtins; mapAttrs (p: _: { inherit (packages) p; }) packages;
   };
 }
