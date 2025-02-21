@@ -26,7 +26,7 @@ python3.pkgs.buildPythonApplication rec {
     poetry-dynamic-versioning
   ];
 
-  dependencies = with python3.pkgs; [ setuptools ];
+  dependencies = with python3.pkgs; [setuptools];
 
   propagatedBuildInputs = with python3.pkgs; [
     pyyaml
@@ -40,18 +40,18 @@ python3.pkgs.buildPythonApplication rec {
   ];
 
   optional-dependencies =
-    lib.optional withGoogle [ "google" ]
-    ++ lib.optional withGoogleKeep [ "gkeep" ]
-    ++ lib.optional withNotion [ "notion" ]
-    ++ lib.optional withAsana [ "asana" ]
-    ++ lib.optional withCalDav [ "caldav" ]
-    ++ lib.optional withTaskwarrior [ "taskw" ]
-    ++ lib.optional withFs [ "fs" ];
+    lib.optional withGoogle ["google"]
+    ++ lib.optional withGoogleKeep ["gkeep"]
+    ++ lib.optional withNotion ["notion"]
+    ++ lib.optional withAsana ["asana"]
+    ++ lib.optional withCalDav ["caldav"]
+    ++ lib.optional withTaskwarrior ["taskw"]
+    ++ lib.optional withFs ["fs"];
 
   meta = {
     description = "Bi-directional synchronization between services such as Taskwarrior, Google Calendar, Notion, Asana, and more";
     homepage = "https://github.com/bergercookie/syncall";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ shymega ];
+    maintainers = with lib.maintainers; [shymega];
   };
 }
