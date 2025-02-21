@@ -59,7 +59,7 @@
     };
 
   wlroots =
-    (pkgs.wlroots_0_17.override {
+    (pkgs.wlroots.override {
       wayland = wayland-git;
       wayland-scanner = wayland-scanner-git;
       wayland-protocols = wayland-protocols-git;
@@ -67,36 +67,32 @@
     })
     .overrideAttrs
     (oldAttrs: {
-      patches = oldAttrs.patches ++ [./wlroots-patches/displaylink-custom.patch];
+      # patches = oldAttrs.patches ++ [./wlroots-patches/displaylink-custom.patch];
+      patches = oldAttrs.patches;
       buildInputs = (oldAttrs.buildInputs or []) ++ (with pkgs; [lcms2]);
       inherit (oldAttrs) nativeBuildInputs version src;
     });
 in
   (pkgs.dwl.override {
     enableXWayland = true;
-    wayland = wayland-git;
-    wayland-protocols = wayland-protocols-git;
-    inherit wlroots;
-    wayland-scanner = wayland-scanner-git;
-    conf = ./config.h;
+    # wayland = wayland-git;
+    # wayland-protocols = wayland-protocols-git;
+    # inherit wlroots;
+    # wayland-scanner = wayland-scanner-git;
+    configH = ./config.h;
   })
   .overrideAttrs
   (oldAttrs: rec {
-    version = "0.6";
+    version = "0.7";
     src = pkgs.fetchFromGitea {
       domain = "codeberg.org";
       owner = "dwl";
       repo = "dwl";
       rev = "v${version}";
-      hash = "sha256-fygUzEi4bgopesvHByfpatkLFYI98qozJOUBNM2t9Mg=";
+      hash = "sha256-7SoCITrbMrlfL4Z4hVyPpjB9RrrjLXHP9C5t1DVXBBA=";
     };
     buildInputs =
-      (oldAttrs.buildInputs or [])
-      ++ (with pkgs; [
-        libdrm
-        fcft
-      ])
-      ++ [wlroots];
+      (oldAttrs.buildInputs or []);
     inherit patches;
     postPatch = let
       configFile = ./config.def.h;
