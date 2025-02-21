@@ -1,6 +1,7 @@
 { lib
 , writeShellApplication
 , pkgs
+,
 }:
 let
   inherit (lib) getExe getExe';
@@ -33,7 +34,6 @@ writeShellApplication {
   '';
 
   meta = {
-    maintainers = with lib.maintainers;
-      [ shymega ];
+    maintainers = with lib.maintainers; [ shymega ];
   };
 }
