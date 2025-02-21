@@ -5,7 +5,6 @@
   lib,
   buildWin32 ? false,
   buildWin64 ? false,
-  buildX86 ? true,
   buildPPC64 ? false,
   buildPPC32 ? false,
   buildArm64 ? true,
@@ -20,7 +19,6 @@
   pkgsCrossBase = pkgs.pkgsCross;
   inherit (stdenv) mkDerivation;
   inherit (lib) optionals optional;
-  inherit (builtins) throw;
 
   pkgsCross =
     optionals (pkgsCrossBase != null) []
