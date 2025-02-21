@@ -1,7 +1,6 @@
 {
   description = "My public packages repo [LEGACY]";
 
-
   nixConfig = {
     substituters = [
       "https://shypkgs.cachix.org?priority=10"
