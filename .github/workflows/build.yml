@@ -3,21 +3,19 @@ on:
   push:
     branches:
       - main
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@main
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - uses: cachix/cachix-action@v15
-      with:
-        name: shypkgs
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake path:$GITHUB_WORKSPACE
-    - run: nix-shell --run "echo OK"
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: cachix/cachix-action@v15
+        with:
+          name: shypkgs
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake path:"$GITHUB_WORKSPACE"
+      - run: nix-shell --run "echo OK"
