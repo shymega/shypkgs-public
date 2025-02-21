@@ -5,7 +5,7 @@
   python3Packages,
 }: let
   inherit (python3Packages) buildPythonApplication;
-  buildstream2 = pkgs.callPackage ../buildstream/buildstream-v2.nix { };
+  buildstream2 = pkgs.callPackage ../buildstream/buildstream-v2.nix {};
 in
   buildPythonApplication rec {
     pname = "bst-to-lorry";
@@ -21,11 +21,10 @@ in
 
     build-system = with python3Packages; [setuptools setuptools-scm];
 
-    propagatedBuildInputs =
-      [
-        buildstream2
-        python3Packages.pyyaml
-      ];
+    propagatedBuildInputs = [
+      buildstream2
+      python3Packages.pyyaml
+    ];
 
     doCheck = false;
 
