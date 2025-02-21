@@ -14,7 +14,7 @@ in
     src = fetchFromGitLab {
       owner = "CodethinkLabs/lorry";
       repo = "bst-to-lorry";
-      rev = "main";
+      rev = "e1734575d7333406056aeaef739099588125fb7c";
       hash = "sha256-vQnMqj5Woi7xpLrFNFXMVoJBKCT096TnLSlecRm1YMk=";
     };
 
