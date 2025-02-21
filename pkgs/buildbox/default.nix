@@ -14,6 +14,7 @@
 , libuuid
 , tomlplusplus
 , fuse3
+,
 }:
 let
   version = "1.2.25";
@@ -22,8 +23,24 @@ stdenv.mkDerivation {
   pname = "buildbox";
   inherit version;
 
-  buildInputs = [ cmake pkg-config ninja ];
-  nativeBuildInputs = [ grpc gbenchmark gtest glog protobuf nlohmann_json zlib openssl libuuid tomlplusplus fuse3 ];
+  buildInputs = [
+    cmake
+    pkg-config
+    ninja
+  ];
+  nativeBuildInputs = [
+    grpc
+    gbenchmark
+    gtest
+    glog
+    protobuf
+    nlohmann_json
+    zlib
+    openssl
+    libuuid
+    tomlplusplus
+    fuse3
+  ];
 
   src = fetchFromGitLab {
     domain = "gitlab.com";
