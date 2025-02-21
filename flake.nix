@@ -90,7 +90,8 @@
           wl-screen-share
           wl-screen-share-stop
           buildbox
-          buildstream
+          buildstream1
+          buildstream2
           ;
       };
     };
