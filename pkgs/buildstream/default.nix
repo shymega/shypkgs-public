@@ -29,6 +29,9 @@ let
         pip
       ]
       ++ [ pkgs.pdm ];
+    meta = {
+      platforms = lib.platforms.linux;
+    };
   };
 in
 buildPythonApplication rec {
@@ -78,4 +81,8 @@ buildPythonApplication rec {
     ]
     ++ [ pkgs.pdm ];
   doCheck = false;
+
+  meta = {
+    platforms = lib.platforms.linux;
+  };
 }
