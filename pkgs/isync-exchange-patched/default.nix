@@ -1,6 +1,6 @@
-{ pkgs
-, withCyrusSaslXoauth2 ? true
-,
+{
+  pkgs,
+  withCyrusSaslXoauth2 ? true,
 }:
 let
   inherit (pkgs) isync fetchgit;

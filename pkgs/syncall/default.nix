@@ -1,14 +1,14 @@
-{ lib
-, python3
-, fetchPypi
-, withGoogle ? false
-, withGoogleKeep ? false
-, withNotion ? false
-, withAsana ? false
-, withCalDav ? false
-, withTaskwarrior ? false
-, withFs ? false
-,
+{
+  lib,
+  python3,
+  fetchPypi,
+  withGoogle ? false,
+  withGoogleKeep ? false,
+  withNotion ? false,
+  withAsana ? false,
+  withCalDav ? false,
+  withTaskwarrior ? false,
+  withFs ? false,
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "syncall";

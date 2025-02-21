@@ -1,21 +1,21 @@
-{ lib
-, stdenv
-, fetchFromGitLab
-, cmake
-, pkg-config
-, ninja
-, grpc
-, gbenchmark
-, gtest
-, protobuf
-, glog
-, nlohmann_json
-, zlib
-, openssl
-, libuuid
-, tomlplusplus
-, fuse3
-,
+{
+  lib,
+  stdenv,
+  fetchFromGitLab,
+  cmake,
+  pkg-config,
+  ninja,
+  grpc,
+  gbenchmark,
+  gtest,
+  protobuf,
+  glog,
+  nlohmann_json,
+  zlib,
+  openssl,
+  libuuid,
+  tomlplusplus,
+  fuse3,
 }:
 let
   pname = "buildbox";

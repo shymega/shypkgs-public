@@ -1,7 +1,7 @@
-{ lib
-, writeShellApplication
-, pkgs
-,
+{
+  lib,
+  writeShellApplication,
+  pkgs,
 }:
 let
   inherit (lib) getExe getExe';

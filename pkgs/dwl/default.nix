@@ -1,14 +1,15 @@
-{ pkgs
-, patches ? [
+{
+  pkgs,
+  patches ? [
     ./dwl-patches/attachbottom.patch
     ./dwl-patches/vanitygaps.patch
     ./dwl-patches/focusdirection.patch
-  ]
-, cmd ? {
+  ],
+  cmd ? {
     terminal = pkgs.lib.getExe pkgs.alacritty;
     menu = pkgs.lib.getExe (pkgs.callPackage ../wm-menu { });
-  }
-, ...
+  },
+  ...
 }:
 let
   wayland-src = pkgs.fetchFromGitLab {

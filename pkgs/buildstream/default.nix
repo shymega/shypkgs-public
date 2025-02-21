@@ -1,13 +1,13 @@
-{ python3Packages
-, fetchPypi
-, lzip
-, patch
-, bubblewrap
-, fuse3
-, withDulwich ? false
-, withRequests ? false
-, lib
-,
+{
+  python3Packages,
+  fetchPypi,
+  lzip,
+  patch,
+  bubblewrap,
+  fuse3,
+  withDulwich ? false,
+  withRequests ? false,
+  lib,
 }:
 let
   inherit (python3Packages) buildPythonApplication buildPythonPackage;
