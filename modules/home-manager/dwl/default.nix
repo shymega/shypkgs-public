@@ -1,8 +1,9 @@
 { inputs, system, ... }:
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 with lib;
 assert lib.hasSuffix "-linux" system;
