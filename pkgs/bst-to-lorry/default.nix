@@ -5,7 +5,15 @@
   python3Packages,
 }: let
   inherit (python3Packages) buildPythonApplication;
-  buildstream2 = pkgs.callPackage ../buildstream/buildstream-v2.nix {};
+  buildstream2 = (pkgs.callPackage ../buildstream/buildstream-v2.nix {}).overrideAttrs (oldAttrs: {
+    propagatedBuildInputs =
+      oldAttrs.propagatedBuildInputs
+      ++ (with pkgs.python3Packages; [
+        tomlkit
+        dulwich
+        requests
+      ]);
+  });
 in
   buildPythonApplication rec {
     pname = "bst-to-lorry";
@@ -19,7 +27,10 @@ in
       hash = "sha256-6k+jaiWkamOy6x/9e7WbwhiBlH06sulA6S9wZFsqMco=";
     };
 
-    build-system = with python3Packages; [setuptools setuptools-scm];
+    build-system = with python3Packages; [
+      setuptools
+      setuptools-scm
+    ];
 
     propagatedBuildInputs = [
       buildstream2
