@@ -67,9 +67,9 @@ in
       "ARCHS=${trim makeTargetArchs}"
     ];
 
-    meta = with lib; {
-      maintainers = with maintainers; [shymega];
+    meta = {
+      maintainers = with lib.maintainers; [shymega];
       mainProgram = "arch-test";
-      platforms = with platforms; linux;
+      platforms = with lib.platforms; linux;
     };
   }
