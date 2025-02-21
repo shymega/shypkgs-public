@@ -6,7 +6,6 @@
 with pkgs;
   {
     email-gitsync = callPackage ./email-gitsync {};
-    syncall = callPackage ./syncall {};
     isync-exchange-patched = callPackage ./isync-exchange-patched {};
     offlineimap-patched = callPackage ./offlineimap-patched {};
   }
