@@ -14,5 +14,5 @@ with pkgs;
   wl-screen-share = callPackage ./wl-share-screen { };
   wl-screen-share-stop = callPackage ./wl-share-screen-stop { };
   buildbox = callPackage ./buildbox { };
-  buildstream = callPackage ./buildstream { };
+  buildstream2 = callPackage ./buildstream/buildstream-v2.nix { };
 }
