@@ -4,6 +4,9 @@
 , patch
 , bubblewrap
 , fuse3
+, withDulwich ? false
+, withRequests ? false
+, lib
 ,
 }:
 let
@@ -55,14 +58,17 @@ buildPythonApplication rec {
       markupsafe
     ]
     ++ [ pyroaring ];
-  propagatedBuildInputs = [
-    lzip
-    patch
-    bubblewrap
-    lzip
-    fuse3
-    python3Packages.cython
-  ];
+  propagatedBuildInputs =
+    [
+      lzip
+      patch
+      bubblewrap
+      lzip
+      fuse3
+      python3Packages.cython
+    ]
+    ++ lib.optional withDulwich python3Packages.dulwich
+    ++ lib.optional withRequests python3Packages.requests;
 
   nativeBuildInputs =
     with python3Packages;
