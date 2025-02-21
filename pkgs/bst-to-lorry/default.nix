@@ -25,7 +25,7 @@ in
       owner = "CodethinkLabs/lorry";
       repo = "bst-to-lorry";
       rev = "main";
-      hash = "sha256-rZZTKR2M+Or7yE8qdtc6J7UN9K1DMCJtWmFcVCTAs+8=";
+      hash = "sha256-vQnMqj5Woi7xpLrFNFXMVoJBKCT096TnLSlecRm1YMk=";
     };
 
     build-system = with python3Packages; [
