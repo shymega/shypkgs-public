@@ -1,5 +1,18 @@
 {
-  description = "My public packages repo";
+  description = "My public packages repo [LEGACY]";
+
+
+  nixConfig = {
+    substituters = [
+      "https://shypkgs.cachix.org?priority=10"
+      "https://cache.nixos.org?priority=15"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "shypkgs.cachix.org-1:MlhLc9bDMhpLoKefzZ5OUH24kxtcWGXHw7lzwAn8i9I="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
