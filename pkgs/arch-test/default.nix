@@ -63,7 +63,7 @@ in
     nativeBuildInputs = pkgsCross;
 
     makeFlags = [
-      "ARCHS=${makeTargetArchs}
+      "ARCHS=${makeTargetArchs}"
     ];
 
     #  patches = [
