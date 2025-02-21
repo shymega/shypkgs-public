@@ -5,7 +5,8 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixfigs-helpers.url = "github:shymega/nixfigs-helpers";
   };
-  outputs = { self, ... }@inputs:
+  outputs =
+    { self, ... }@inputs:
     let
       genPkgs =
         system:
@@ -30,15 +31,22 @@
       forAllSystems = f: inputs.nixpkgs.lib.genAttrs allSystems f;
       forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
 
-      treeFmtEachSystem = f: inputs.nixpkgs.lib.genAttrs systems (system: f inputs.nixpkgs.legacyPackages.${system});
-      treeFmtEval = treeFmtEachSystem (pkgs: inputs.nixfigs-helpers.inputs.treefmt-nix.lib.evalModule pkgs "${inputs.nixfigs-helpers.helpers.formatter}");
+      treeFmtEachSystem =
+        f: inputs.nixpkgs.lib.genAttrs systems (system: f inputs.nixpkgs.legacyPackages.${system});
+      treeFmtEval = treeFmtEachSystem (
+        pkgs:
+        inputs.nixfigs-helpers.inputs.treefmt-nix.lib.evalModule pkgs "${inputs.nixfigs-helpers.helpers.formatter
+        }"
+      );
     in
     {
-      packages = forAllSystems (system:
+      packages = forAllSystems (
+        system:
         let
           pkgs = inputs.nixpkgs.legacyPackages.${system};
         in
-        import ./pkgs { inherit system inputs pkgs; });
+        import ./pkgs { inherit system inputs pkgs; }
+      );
       nixosModules = forAllSystems (system: (import ./modules { inherit system inputs; }).nixosModules);
       hmModules = forAllSystems (system: (import ./modules { inherit system inputs; }).hmModules);
 
@@ -52,9 +60,7 @@
           })
         // forEachSystem (system: {
           pre-commit-check = import "${inputs.nixfigs-helpers.helpers.checks}" {
-            inherit
-              self
-              system;
+            inherit self system;
             inherit (inputs.nixfigs-helpers) inputs;
             inherit (inputs.nixpkgs) lib;
           };
@@ -73,7 +79,20 @@
         allowInsecurePredicate = _: true;
       };
       overlays.default = final: _: {
-        inherit (self.packages.${final.system}) dwl email-gitsync hello-world wm-menu syncall isync-exchange-patched;
+        # FIXME: Map over attrset.
+        inherit (self.packages.${final.system})
+          dwl
+          email-gitsync
+          isync-exchange-patched
+          syncall
+          is-net-metered
+          wm-menu
+          wifi-qr
+          wl-screen-share
+          wl-screen-share-stop
+          buildbox
+          buildstream
+          ;
       };
     };
 }

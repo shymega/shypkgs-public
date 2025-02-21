@@ -1,5 +1,4 @@
-{ pkgs
-}:
+{ pkgs }:
 pkgs.writeShellApplication {
   name = "is-net-metered";
   text = ''
