@@ -11,17 +11,16 @@
   buildArm ? true,
   buildM68k ? false,
   buildMips ? false,
-  buildRiscv64 ? true,
-  buildRiscv32 ? true,
+  buildRiscv64 ? false,
+  buildRiscv32 ? false,
   buildAmd64 ? true,
   ...
 }: let
   pkgsCrossBase = pkgs.pkgsCross;
-  inherit (stdenv) mkDerivation;
-  inherit (lib) optionals optionalString concatStringsSep;
-  inherit (lib.strings) trim;
 
-  pkgsCross =
+  pkgsCross = let
+    inherit (lib) optionals;
+  in
     optionals (pkgsCrossBase != null) []
     ++ optionals buildPPC64 (with pkgsCrossBase.ppc64; [gcc binutils])
     ++ optionals buildPPC32 (with pkgsCrossBase.ppc; [gcc binutils])
@@ -34,23 +33,28 @@
     ++ optionals buildWin32 (with pkgsCrossBase.mingw32; [gcc binutils])
     ++ optionals buildWin64 (with pkgsCrossBase.mingWW64; [gcc binutils]);
 
-  makeTargetArchs = concatStringsSep " " [
-    (optionalString buildPPC64 "ppc64")
-    (optionalString buildPPC32 "ppc")
-    (optionalString buildArm (concatStringsSep " " ["arm"]))
-    (optionalString buildArm64 "arm64")
-    (optionalString buildM68k "m68k")
-    (optionalString buildMips "mips")
-    (optionalString buildRiscv64 "riscv64")
-    (optionalString buildRiscv32 "riscv32")
-    (optionalString buildAmd64 "amd64")
-    (optionalString buildWin32 "win32")
-    (optionalString buildWin64 "win64")
-  ];
+  makeTargetArchs = let
+    inherit (lib) optionalString concatStringsSep;
+  in
+    concatStringsSep " " [
+      (optionalString buildPPC64 "ppc64")
+      (optionalString buildPPC32 "ppc")
+      (optionalString buildArm (concatStringsSep " " ["arm"]))
+      (optionalString buildArm64 "arm64")
+      (optionalString buildM68k "m68k")
+      (optionalString buildMips "mips")
+      (optionalString buildRiscv64 "riscv64")
+      (optionalString buildRiscv32 "riscv32")
+      (optionalString buildAmd64 "amd64")
+      (optionalString buildWin32 "win32")
+      (optionalString buildWin64 "win64")
+    ];
+
+  version = "0.21";
 in
-  mkDerivation rec {
+  stdenv.mkDerivation {
     name = "arch-test";
-    version = "0.21";
+    inherit version;
 
     src = fetchFromGitHub {
       owner = "kilobyte";
@@ -64,16 +68,20 @@ in
 
     installPhase = ''
       mkdir -p $out/bin
-      echo noop > $out/bin/arch-test
+      echo 'echo noop' > $out/bin/arch-test
     '';
 
     nativeBuildInputs = pkgsCross;
 
-    makeFlags = [
+    makeFlags = let
+      inherit (lib.strings) trim;
+    in [
       "ARCHS=${trim makeTargetArchs}"
     ];
 
-    #  patches = [
-    #    ./Makefiles-nix.patch
-    #  ];
+    meta = with lib; {
+      maintainers = with maintainers; [shymega];
+      mainProgram = "arch-test";
+      platforms = with platforms; linux;
+    };
   }
