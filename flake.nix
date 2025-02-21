@@ -84,6 +84,7 @@
     };
     overlays.default = final: _: let
       packages = self.packages.${final.system};
-    in with builtins; mapAttrs (p: _: { inherit (packages) p; }) packages;
+    in
+      with builtins; mapAttrs (p: _: {inherit (packages) p;}) packages;
   };
 }
