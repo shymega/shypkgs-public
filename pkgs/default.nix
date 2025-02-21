@@ -7,6 +7,8 @@ with pkgs;
   {
     email-gitsync = callPackage ./email-gitsync {};
     isync-exchange-patched = callPackage ./isync-exchange-patched {};
+    git-wip = callPackage ./git-wip {};
+    mutt2task = callPackage ./mutt2task {};
   }
   // lib.optionalAttrs pkgs.stdenv.isLinux rec {
     dwl = callPackage ./dwl {inherit inputs pkgs;};
@@ -20,5 +22,4 @@ with pkgs;
     buildstream2 = buildstream;
     bst-to-lorry = callPackage ./bst-to-lorry {inherit buildstream2;};
     arch-test = callPackage ./arch-test {inherit inputs;};
-    git-wip = callPackage ./git-wip {};
   }
