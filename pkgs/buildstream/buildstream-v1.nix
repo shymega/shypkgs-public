@@ -71,7 +71,7 @@ in
         fusepy
       ]);
 
-    buildInputs = [ makeWrapper ];
+    buildInputs = [makeWrapper];
 
     LD_LIBRARY_PATH = "${lib.makeLibraryPath [fuse2]}";
 
