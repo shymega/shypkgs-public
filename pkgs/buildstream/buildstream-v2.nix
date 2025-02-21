@@ -10,7 +10,6 @@
   buildbox,
 }: let
   inherit (python3Packages) buildPythonApplication buildPythonPackage;
-  # FIXME: Upstream `pyroaring` to Nixpkgs .
   pyroaring = buildPythonPackage rec {
     pname = "pyroaring";
     version = "0.4.5";
