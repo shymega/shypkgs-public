@@ -1,4 +1,5 @@
-{ stdenv
+{ lib
+, stdenv
 , fetchFromGitLab
 , cmake
 , pkg-config
@@ -48,5 +49,9 @@ stdenv.mkDerivation {
     repo = "${pname}/${pname}";
     rev = "${version}";
     sha256 = "sha256-8umP9tUnSiB+ujlaMDrkwpU9269h/MGZZ2MsZS/c/Xs=";
+  };
+
+  meta = {
+    platforms = lib.platforms.linux;
   };
 }
