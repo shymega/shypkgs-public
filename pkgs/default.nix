@@ -19,5 +19,5 @@ with pkgs;
     buildbox = callPackage ./buildbox {};
     buildstream1 = callPackage ./buildstream/buildstream-v1.nix {};
     buildstream2 = callPackage ./buildstream/buildstream-v2.nix {};
-    arch-test = callPackage ./arch-test { inherit inputs; };
+    arch-test = callPackage ./arch-test {inherit inputs;};
   }
