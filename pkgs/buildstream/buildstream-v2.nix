@@ -46,14 +46,18 @@ in
     dependencies = with python3Packages;
       [
         click
+        dulwich
         grpcio
         jinja2
         markupsafe
+        packaging
         pluginbase
         protobuf
         psutil
+        requests
         ruamel-yaml
         ruamel-yaml-clib
+        tomlkit
         ujson
       ]
       ++ [pyroaring];
