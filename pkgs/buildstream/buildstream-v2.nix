@@ -74,5 +74,6 @@ in
 
     meta = {
       platforms = lib.platforms.linux;
+      mainProgram = "bst";
     };
   }
