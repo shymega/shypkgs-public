@@ -7,11 +7,10 @@
   ],
   cmd ? {
     terminal = pkgs.lib.getExe pkgs.alacritty;
-    menu = pkgs.lib.getExe (pkgs.callPackage ../wm-menu { });
+    menu = pkgs.lib.getExe (pkgs.callPackage ../wm-menu {});
   },
   ...
-}:
-let
+}: let
   wayland-src = pkgs.fetchFromGitLab {
     domain = "gitlab.freedesktop.org";
     owner = "wayland";
@@ -30,17 +29,17 @@ let
     };
   };
 
-  mesa-drm-git = pkgs.mesa.override { libdrm = libdrm-git; };
+  mesa-drm-git = pkgs.mesa.override {libdrm = libdrm-git;};
 
   wayland-scanner-git = pkgs.wayland-scanner.overrideAttrs {
     version = "1.23.1";
-    patches = [ ];
+    patches = [];
     src = wayland-src;
   };
 
   wayland-git = pkgs.wayland.overrideAttrs {
     version = "1.23.1";
-    patches = [ ];
+    patches = [];
     src = wayland-src;
   };
 
@@ -48,15 +47,16 @@ let
     (pkgs.wayland-protocols.override {
       wayland = wayland-git;
       wayland-scanner = wayland-scanner-git;
-    }).overrideAttrs
-      rec {
-        pname = "wayland-protocols";
-        version = "1.37";
-        src = pkgs.fetchurl {
-          url = "https://gitlab.freedesktop.org/wayland/${pname}/-/releases/${version}/downloads/${pname}-${version}.tar.xz";
-          hash = "sha256-pw6b6STy6GiOaCTc6vYYj6rNWuIY36yNCj0JdiEe8yY=";
-        };
+    })
+    .overrideAttrs
+    rec {
+      pname = "wayland-protocols";
+      version = "1.37";
+      src = pkgs.fetchurl {
+        url = "https://gitlab.freedesktop.org/wayland/${pname}/-/releases/${version}/downloads/${pname}-${version}.tar.xz";
+        hash = "sha256-pw6b6STy6GiOaCTc6vYYj6rNWuIY36yNCj0JdiEe8yY=";
       };
+    };
 
   wlroots =
     (pkgs.wlroots_0_17.override {
@@ -64,22 +64,23 @@ let
       wayland-scanner = wayland-scanner-git;
       wayland-protocols = wayland-protocols-git;
       mesa = mesa-drm-git;
-    }).overrideAttrs
-      (oldAttrs: {
-        patches = oldAttrs.patches ++ [ ./wlroots-patches/displaylink-custom.patch ];
-        buildInputs = (oldAttrs.buildInputs or [ ]) ++ (with pkgs; [ lcms2 ]);
-        inherit (oldAttrs) nativeBuildInputs version src;
-
-      });
+    })
+    .overrideAttrs
+    (oldAttrs: {
+      patches = oldAttrs.patches ++ [./wlroots-patches/displaylink-custom.patch];
+      buildInputs = (oldAttrs.buildInputs or []) ++ (with pkgs; [lcms2]);
+      inherit (oldAttrs) nativeBuildInputs version src;
+    });
 in
-(pkgs.dwl.override {
-  enableXWayland = true;
-  wayland = wayland-git;
-  wayland-protocols = wayland-protocols-git;
-  inherit wlroots;
-  wayland-scanner = wayland-scanner-git;
-  conf = ./config.h;
-}).overrideAttrs
+  (pkgs.dwl.override {
+    enableXWayland = true;
+    wayland = wayland-git;
+    wayland-protocols = wayland-protocols-git;
+    inherit wlroots;
+    wayland-scanner = wayland-scanner-git;
+    conf = ./config.h;
+  })
+  .overrideAttrs
   (oldAttrs: rec {
     version = "0.6";
     src = pkgs.fetchFromGitea {
@@ -90,20 +91,18 @@ in
       hash = "sha256-fygUzEi4bgopesvHByfpatkLFYI98qozJOUBNM2t9Mg=";
     };
     buildInputs =
-      (oldAttrs.buildInputs or [ ])
+      (oldAttrs.buildInputs or [])
       ++ (with pkgs; [
         libdrm
         fcft
       ])
-      ++ [ wlroots ];
+      ++ [wlroots];
     inherit patches;
-    postPatch =
-      let
-        configFile = ./config.def.h;
-      in
-      ''
-        cp ${configFile} config.def.h
-        substituteInPlace ./config.def.h --replace "@TERM@" "${cmd.terminal}"
-        substituteInPlace ./config.def.h --replace "@MENU@" "${cmd.menu}"
-      '';
+    postPatch = let
+      configFile = ./config.def.h;
+    in ''
+      cp ${configFile} config.def.h
+      substituteInPlace ./config.def.h --replace "@TERM@" "${cmd.terminal}"
+      substituteInPlace ./config.def.h --replace "@MENU@" "${cmd.menu}"
+    '';
   })
