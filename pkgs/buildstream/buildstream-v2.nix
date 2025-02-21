@@ -15,7 +15,7 @@
     version = "0.4.5";
     src = fetchPypi {
       inherit pname version;
-      sha256 = "sha256-gWyTuqXHKf+QYFb/7fcjyc3a8eqYioguDsUGKunqZzw=";
+      hash = "sha256-gWyTuqXHKf+QYFb/7fcjyc3a8eqYioguDsUGKunqZzw=";
     };
     doCheck = false;
     propagatedBuildInputs = with python3Packages; [cython];
