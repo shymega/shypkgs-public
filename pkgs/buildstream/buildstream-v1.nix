@@ -6,6 +6,8 @@
   lzip,
   patch,
   python310Packages,
+  makeWrapper,
+  binutils,
 }: let
   inherit (python310Packages) buildPythonApplication buildPythonPackage;
   pytest-runner = buildPythonPackage rec {
@@ -62,21 +64,22 @@ in
       [
         lzip
         patch
+        binutils
       ]
       ++ (with python310Packages; [
         cython
         fusepy
       ]);
 
-    LIBRARY_PATH = "${lib.makeLibraryPath [fuse2]}";
+    buildInputs = [ makeWrapper ];
 
-    preFixup = ''
-      export LIBRARY_PATH="${lib.makeLibraryPath [fuse2]}:$LD_LIBRARY_PATH"
-    '';
+    LD_LIBRARY_PATH = "${lib.makeLibraryPath [fuse2]}";
 
     doCheck = false;
 
-    makeWrapperArgs = ["--set LIBRARY_PATH ${fuse2}/lib/libfuse.so"];
+    makeWrapperArgs = [
+      "--set LD_LIBRARY_PATH ${LD_LIBRARY_PATH}"
+    ];
 
     meta = {
       platforms = lib.platforms.linux;
