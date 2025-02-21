@@ -87,18 +87,19 @@
       # FIXME: Map over attrset.
       inherit
         (self.packages.${final.system})
-        dwl
-        email-gitsync
-        isync-exchange-patched
-        syncall
-        is-net-metered
-        wm-menu
-        wifi-qr
-        wl-screen-share
-        wl-screen-share-stop
+        arch-test
+        bst-to-lorry
         buildbox
         buildstream1
         buildstream2
+        dwl
+        email-gitsync
+        is-net-metered
+        isync-exchange-patched
+        offlineimap-patched
+        wl-screen-share
+        wl-screen-share-stop
+        wm-menu
         ;
     };
   };
