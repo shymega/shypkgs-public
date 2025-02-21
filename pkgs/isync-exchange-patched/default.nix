@@ -11,7 +11,7 @@ in
     src = fetchgit {
       url = "https://github.com/shymega/isync";
       rev = "87796f0b813572c169dd0ac95b1efe377d833a8a";
-      sha256 = "sha256-+kYBW1UvlZz0lRRSfw0se+YcvllqisawsgjlSE04m3k=";
+      hash = "sha256-+kYBW1UvlZz0lRRSfw0se+YcvllqisawsgjlSE04m3k=";
     };
 
     preConfigure = ''

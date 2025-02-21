@@ -60,7 +60,7 @@ in
       owner = "kilobyte";
       repo = "arch-test";
       rev = "v${version}";
-      sha256 = "sha256-3+3vWrrMfQlIlxQM6J/oAIVpy4JeLVjqnyMOBzk/a30=";
+      hash = "sha256-3+3vWrrMfQlIlxQM6J/oAIVpy4JeLVjqnyMOBzk/a30=";
     };
 
     dontConfigure = true;

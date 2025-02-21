@@ -51,7 +51,7 @@ in
       owner = "BuildGrid";
       repo = "${pname}/${pname}";
       rev = "${version}";
-      sha256 = "sha256-8umP9tUnSiB+ujlaMDrkwpU9269h/MGZZ2MsZS/c/Xs=";
+      hash = "sha256-8umP9tUnSiB+ujlaMDrkwpU9269h/MGZZ2MsZS/c/Xs=";
     };
 
     postFixup = ''
