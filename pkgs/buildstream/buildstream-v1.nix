@@ -5,11 +5,11 @@
   fuse2,
   lzip,
   patch,
-  python310Packages,
+  python311Packages,
   makeWrapper,
   binutils,
 }: let
-  inherit (python310Packages) buildPythonApplication buildPythonPackage;
+  inherit (python311Packages) buildPythonApplication buildPythonPackage;
   pytest-runner = buildPythonPackage rec {
     pname = "pytest-runner";
     version = "6.0.1";
@@ -20,7 +20,7 @@
       hash = "sha256-cNRzlYWnAI83v0kzwBP9sye4h4paafy7MxbIiILw9Js=";
     };
 
-    build-system = with python310Packages; [setuptools setuptools-scm];
+    build-system = with python311Packages; [setuptools setuptools-scm];
   };
 in
   buildPythonApplication rec {
@@ -33,9 +33,9 @@ in
       hash = "sha256-rEYGwCbpbBBMeSpRdsETSHGivDxQVm/PSFW5DmEZtGA=";
     };
 
-    build-system = with python310Packages; [setuptools];
+    build-system = with python311Packages; [setuptools];
 
-    dependencies = with python310Packages;
+    dependencies = with python311Packages;
       [
         click
         fusepy
@@ -54,7 +54,7 @@ in
       ++ [pytest-runner];
 
     nativeBuildInputs =
-      (with python310Packages; [
+      (with python311Packages; [
         pdm-pep517
         setuptools-scm
       ])
@@ -66,7 +66,7 @@ in
         patch
         binutils
       ]
-      ++ (with python310Packages; [
+      ++ (with python311Packages; [
         cython
         fusepy
       ]);
