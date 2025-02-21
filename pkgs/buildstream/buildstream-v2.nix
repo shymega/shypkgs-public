@@ -7,6 +7,7 @@
   fuse3,
   lib,
   pkgs,
+  buildbox,
 }: let
   inherit (python3Packages) buildPythonApplication buildPythonPackage;
   # FIXME: Upstream `pyroaring` to Nixpkgs .
@@ -30,16 +31,15 @@
       platforms = lib.platforms.linux;
     };
   };
-  buildbox = pkgs.callPackage ../buildbox {};
 in
   buildPythonApplication rec {
     pname = "buildstream";
-    version = "2.3.0";
+    version = "2.4.0";
     pyproject = true;
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-lCdIKhwJWCqnXThYRma48S06bhp6NwByMGSX/nLBOTI=";
+      hash = "sha256-dj25ELy/79ouN8zRHvoSxX2XNdOgN5BNdbEiditIAro=";
     };
 
     build-system = with python3Packages; [setuptools];
@@ -60,11 +60,11 @@ in
       ++ [pyroaring];
     propagatedBuildInputs = [
       bubblewrap
+      buildbox
       fuse3
       lzip
       patch
       python3Packages.cython
-      buildbox
     ];
 
     nativeBuildInputs = with python3Packages;
