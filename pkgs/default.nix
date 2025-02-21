@@ -8,7 +8,7 @@ with pkgs;
     email-gitsync = callPackage ./email-gitsync {};
     isync-exchange-patched = callPackage ./isync-exchange-patched {};
   }
-  // lib.optionalAttrs (pkgs.stdenv.isLinux) {
+  // lib.optionalAttrs pkgs.stdenv.isLinux {
     dwl = callPackage ./dwl {inherit inputs pkgs;};
     is-net-metered = callPackage ./is-net-metered {};
     wm-menu = callPackage ./wm-menu {};
