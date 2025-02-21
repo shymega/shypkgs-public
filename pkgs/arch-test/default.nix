@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   lib,
+  inputs,
   buildWin32 ? false,
   buildWin64 ? false,
   buildPPC64 ? false,
@@ -18,7 +19,8 @@
 }: let
   pkgsCrossBase = pkgs.pkgsCross;
   inherit (stdenv) mkDerivation;
-  inherit (lib) optionals optionalString;
+  inherit (lib) optionals optionalString concatStringsSep;
+  inherit (inputs.nixpkgs-master.lib.strings) trim;
 
   pkgsCross =
     optionals (pkgsCrossBase != null) []
@@ -33,19 +35,19 @@
     ++ optionals buildWin32 (with pkgsCrossBase.mingw32; [gcc binutils])
     ++ optionals buildWin64 (with pkgsCrossBase.mingWW64; [gcc binutils]);
 
-  makeTargetArchs = ''
-    ${optionalString buildPPC64 "ppc64"}
-    ${optionalString buildPPC32 "ppc"}
-    ${optionalString buildArm lib.concatStrings ["arm" " armel" " armhf"]}
-    ${optionalString buildArm64 "aarch64"}
-    ${optionalString buildM68k "m68k"}
-    ${optionalString buildMips "mips"}
-    ${optionalString buildRiscv64 "riscv64"}
-    ${optionalString buildRiscv32 "riscv32"}
-    ${optionalString buildAmd64 "amd64"}
-    ${optionalString buildWin32 "win32"}
-    ${optionalString buildWin64 "win64"}
-  '';
+  makeTargetArchs = concatStringsSep " " [
+    (optionalString buildPPC64 "ppc64")
+    (optionalString buildPPC32 "ppc")
+    (optionalString buildArm (concatStringsSep " " ["arm"]))
+    (optionalString buildArm64 "arm64")
+    (optionalString buildM68k "m68k")
+    (optionalString buildMips "mips")
+    (optionalString buildRiscv64 "riscv64")
+    (optionalString buildRiscv32 "riscv32")
+    (optionalString buildAmd64 "amd64")
+    (optionalString buildWin32 "win32")
+    (optionalString buildWin64 "win64")
+  ];
 in
   mkDerivation rec {
     name = "arch-test";
@@ -61,7 +63,7 @@ in
     nativeBuildInputs = pkgsCross;
 
     makeFlags = [
-      "ARCHS=${makeTargetArchs}"
+      "ARCHS=${trim makeTargetArchs}"
     ];
 
     #  patches = [
