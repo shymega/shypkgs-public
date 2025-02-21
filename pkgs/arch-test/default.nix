@@ -18,7 +18,7 @@
 }: let
   pkgsCrossBase = pkgs.pkgsCross;
   inherit (stdenv) mkDerivation;
-  inherit (lib) optionals optional;
+  inherit (lib) optionals optionalString;
 
   pkgsCross =
     optionals (pkgsCrossBase != null) []
@@ -34,17 +34,17 @@
     ++ optionals buildWin64 (with pkgsCrossBase.mingWW64; [gcc binutils]);
 
   makeTargetArchs = ''
-    ${optional buildPPC64 "ppc64"}
-    ${optional buildPPC32 "ppc"}
-    ${optionals buildArm ["arm" "armel" "armhf"]}
-    ${optional buildArm64 "aarch64"}
-    ${optional buildM68k "m68k"}
-    ${optional buildMips "mips"}
-    ${optional buildRiscv64 "riscv64"}
-    ${optional buildRiscv32 "riscv32"}
-    ${optional buildAmd64 "amd64"}
-    ${optional buildWin32 "win32"}
-    ${optional buildWin64 "win64"}
+    ${optionalString buildPPC64 "ppc64"}
+    ${optionalString buildPPC32 "ppc"}
+    ${optionalString buildArm lib.concatStrings ["arm" " armel" " armhf"]}
+    ${optionalString buildArm64 "aarch64"}
+    ${optionalString buildM68k "m68k"}
+    ${optionalString buildMips "mips"}
+    ${optionalString buildRiscv64 "riscv64"}
+    ${optionalString buildRiscv32 "riscv32"}
+    ${optionalString buildAmd64 "amd64"}
+    ${optionalString buildWin32 "win32"}
+    ${optionalString buildWin64 "win64"}
   '';
 in
   mkDerivation rec {
