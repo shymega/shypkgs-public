@@ -20,4 +20,5 @@ with pkgs;
     buildstream2 = callPackage ./buildstream/buildstream-v2.nix {inherit buildbox;};
     bst-to-lorry = callPackage ./bst-to-lorry {inherit buildstream2;};
     arch-test = callPackage ./arch-test {inherit inputs;};
+    git-wip = callPackage ./git-wip {};
   }
