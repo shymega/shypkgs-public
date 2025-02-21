@@ -60,6 +60,14 @@ in
       sha256 = "sha256-3+3vWrrMfQlIlxQM6J/oAIVpy4JeLVjqnyMOBzk/a30=";
     };
 
+    dontConfigure = true;
+    dontBuild = true;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      echo noop > $out/bin/arch-test
+    '';
+
     nativeBuildInputs = pkgsCross;
 
     makeFlags = [
