@@ -17,7 +17,7 @@ with pkgs;
     wl-screen-share-stop = callPackage ./wl-share-screen-stop {};
     buildbox = callPackage ./buildbox {};
     buildstream = callPackage ./buildstream {inherit buildbox;};
-    inherit buildstream2;
+    buildstream2 = buildstream;
     bst-to-lorry = callPackage ./bst-to-lorry {inherit buildstream2;};
     arch-test = callPackage ./arch-test {inherit inputs;};
     git-wip = callPackage ./git-wip {};
