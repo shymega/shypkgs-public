@@ -93,11 +93,11 @@
         buildstream2
         dwl
         email-gitsync
+        git-wip
         is-net-metered
         isync-exchange-patched
-        offlineimap-patched
-        wl-screen-share
-        wl-screen-share-stop
+        wl-share-screen
+        wl-share-screen-stop
         wm-menu
         ;
     };
