@@ -1,20 +1,10 @@
 {
   lib,
-  pkgs,
   fetchFromGitLab,
   python3Packages,
+  buildstream2,
 }: let
   inherit (python3Packages) buildPythonApplication;
-  buildstream2 = (pkgs.callPackage ../buildstream/buildstream-v2.nix {}).overrideAttrs (oldAttrs: {
-    propagatedBuildInputs =
-      oldAttrs.propagatedBuildInputs
-      ++ (with pkgs.python3Packages; [
-        dulwich
-        packaging
-        requests
-        tomlkit
-      ]);
-  });
 in
   buildPythonApplication rec {
     pname = "bst-to-lorry";
