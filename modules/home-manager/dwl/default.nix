@@ -1,10 +1,17 @@
 { inputs, system, ... }:
-{ config, pkgs, lib, ... }:
+{ config
+, pkgs
+, lib
+, ...
+}:
 with lib;
 assert lib.hasSuffix "-linux" system;
 let
   cfg = config.programs.dwl;
-  dwlPkg = import ../../../pkgs/dwl { inherit pkgs inputs system; inherit (cfg) patches cmd; };
+  dwlPkg = import ../../../pkgs/dwl {
+    inherit pkgs inputs system;
+    inherit (cfg) patches cmd;
+  };
 in
 {
   options.programs.dwl = {
@@ -41,7 +48,5 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    home.packages = singleton cfg.package;
-  };
+  config = mkIf cfg.enable { home.packages = singleton cfg.package; };
 }

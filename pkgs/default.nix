@@ -4,7 +4,8 @@ with pkgs;
   email-gitsync = callPackage ./email-gitsync { };
   syncall = callPackage ./syncall { };
   isync-exchange-patched = callPackage ./isync-exchange-patched { };
-} // lib.optionalAttrs (lib.hasSuffix "-linux" pkgs.system) {
+}
+  // lib.optionalAttrs (lib.hasSuffix "-linux" pkgs.system) {
   dwl = callPackage ./dwl { inherit inputs pkgs; };
   is-net-metered = callPackage ./is-net-metered { };
   wm-menu = callPackage ./wm-menu { };

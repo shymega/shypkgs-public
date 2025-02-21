@@ -1,12 +1,11 @@
 { pkgs
 , withCyrusSaslXoauth2 ? true
+,
 }:
 let
   inherit (pkgs) isync fetchgit;
 in
-(isync.override {
-  inherit withCyrusSaslXoauth2;
-}).overrideAttrs (oldAttrs: rec {
+(isync.override { inherit withCyrusSaslXoauth2; }).overrideAttrs (oldAttrs: rec {
   pname = "isync-exchange-patched";
   version = "1.5.0";
 
@@ -22,12 +21,27 @@ in
     ./autogen.sh
   '';
 
-  nativeBuildInputs = oldAttrs.nativeBuildInputs or (with pkgs; [
-    libtool
-    pkgconfig
-  ] ++ lib.optional withCyrusSaslXoauth2 pkgs.makeWrapper) ++ (with pkgs; [ autoconf automake ]);
+  nativeBuildInputs =
+    oldAttrs.nativeBuildInputs or (
+      with pkgs;
+      [
+        libtool
+        pkgconfig
+      ]
+      ++ lib.optional withCyrusSaslXoauth2 pkgs.makeWrapper
+    )
+    ++ (with pkgs; [
+      autoconf
+      automake
+    ]);
 
-  buildInputs = oldAttrs.buildInputs or (with pkgs; [ cyrus_sasl db openssl zlib ]);
+  buildInputs =
+    oldAttrs.buildInputs or (with pkgs; [
+      cyrus_sasl
+      db
+      openssl
+      zlib
+    ]);
 
   patches = [ ];
 

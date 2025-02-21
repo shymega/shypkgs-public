@@ -4,10 +4,11 @@
 , patch
 , bubblewrap
 , fuse3
+,
 }:
 let
   inherit (python3Packages) buildPythonApplication buildPythonPackage;
-  # FIXME: Upstream `pyroraring` to Nixpkgs .
+  # FIXME: Upstream `pyroaring` to Nixpkgs .
   pyroaring = buildPythonPackage rec {
     pname = "pyroaring";
     version = "0.4.5";
@@ -16,14 +17,15 @@ let
       sha256 = "sha256-gWyTuqXHKf+QYFb/7fcjyc3a8eqYioguDsUGKunqZzw=";
     };
     doCheck = false;
-    propagatedBuildInputs = with python3Packages; [
-      cython
-    ];
-    nativeBuildInputs = with python3Packages; [
-      pdm-pep517
-      setuptools-scm
-      pip
-    ] ++ [ pkgs.pdm ];
+    propagatedBuildInputs = with python3Packages; [ cython ];
+    nativeBuildInputs =
+      with python3Packages;
+      [
+        pdm-pep517
+        setuptools-scm
+        pip
+      ]
+      ++ [ pkgs.pdm ];
   };
 in
 buildPythonApplication rec {
@@ -38,18 +40,21 @@ buildPythonApplication rec {
 
   build-system = with python3Packages; [ setuptools ];
 
-  dependencies = with python3Packages; [
-    click
-    grpcio
-    jinja2
-    pluginbase
-    protobuf
-    psutil
-    ruamel-yaml
-    ruamel-yaml-clib
-    ujson
-    markupsafe
-  ] ++ [ pyroaring ];
+  dependencies =
+    with python3Packages;
+    [
+      click
+      grpcio
+      jinja2
+      pluginbase
+      protobuf
+      psutil
+      ruamel-yaml
+      ruamel-yaml-clib
+      ujson
+      markupsafe
+    ]
+    ++ [ pyroaring ];
   propagatedBuildInputs = [
     lzip
     patch
@@ -59,6 +64,12 @@ buildPythonApplication rec {
     python3Packages.cython
   ];
 
-  nativeBuildInputs = with python3Packages; [ pdm-pep517 setuptools-scm ] ++ [ pkgs.pdm ];
+  nativeBuildInputs =
+    with python3Packages;
+    [
+      pdm-pep517
+      setuptools-scm
+    ]
+    ++ [ pkgs.pdm ];
   doCheck = false;
 }

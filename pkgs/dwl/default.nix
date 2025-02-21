@@ -29,9 +29,7 @@ let
     };
   };
 
-  mesa-drm-git = pkgs.mesa.override {
-    libdrm = libdrm-git;
-  };
+  mesa-drm-git = pkgs.mesa.override { libdrm = libdrm-git; };
 
   wayland-scanner-git = pkgs.wayland-scanner.overrideAttrs {
     version = "1.23.1";
@@ -45,33 +43,33 @@ let
     src = wayland-src;
   };
 
-  wayland-protocols-git = (pkgs.wayland-protocols.override {
-    wayland = wayland-git;
-    wayland-scanner = wayland-scanner-git;
-  }).overrideAttrs rec {
-    pname = "wayland-protocols";
-    version = "1.37";
-    src = pkgs.fetchurl {
-      url = "https://gitlab.freedesktop.org/wayland/${pname}/-/releases/${version}/downloads/${pname}-${version}.tar.xz";
-      hash = "sha256-pw6b6STy6GiOaCTc6vYYj6rNWuIY36yNCj0JdiEe8yY=";
-    };
-  };
+  wayland-protocols-git =
+    (pkgs.wayland-protocols.override {
+      wayland = wayland-git;
+      wayland-scanner = wayland-scanner-git;
+    }).overrideAttrs
+      rec {
+        pname = "wayland-protocols";
+        version = "1.37";
+        src = pkgs.fetchurl {
+          url = "https://gitlab.freedesktop.org/wayland/${pname}/-/releases/${version}/downloads/${pname}-${version}.tar.xz";
+          hash = "sha256-pw6b6STy6GiOaCTc6vYYj6rNWuIY36yNCj0JdiEe8yY=";
+        };
+      };
 
-  wlroots = (pkgs.wlroots_0_17.override {
-    wayland = wayland-git;
-    wayland-scanner = wayland-scanner-git;
-    wayland-protocols = wayland-protocols-git;
-    mesa = mesa-drm-git;
-  }).overrideAttrs (oldAttrs: {
-    patches = oldAttrs.patches ++ [
-      ./wlroots-patches/displaylink-custom.patch
-    ];
-    buildInputs = (oldAttrs.buildInputs or [ ]) ++ (with pkgs; [
-      lcms2
-    ]);
-    inherit (oldAttrs) nativeBuildInputs version src;
+  wlroots =
+    (pkgs.wlroots_0_17.override {
+      wayland = wayland-git;
+      wayland-scanner = wayland-scanner-git;
+      wayland-protocols = wayland-protocols-git;
+      mesa = mesa-drm-git;
+    }).overrideAttrs
+      (oldAttrs: {
+        patches = oldAttrs.patches ++ [ ./wlroots-patches/displaylink-custom.patch ];
+        buildInputs = (oldAttrs.buildInputs or [ ]) ++ (with pkgs; [ lcms2 ]);
+        inherit (oldAttrs) nativeBuildInputs version src;
 
-  });
+      });
 in
 (pkgs.dwl.override {
   enableXWayland = true;
@@ -90,10 +88,13 @@ in
       rev = "v${version}";
       hash = "sha256-fygUzEi4bgopesvHByfpatkLFYI98qozJOUBNM2t9Mg=";
     };
-    buildInputs = (oldAttrs.buildInputs or [ ]) ++ (with pkgs; [
-      libdrm
-      fcft
-    ]) ++ [ wlroots ];
+    buildInputs =
+      (oldAttrs.buildInputs or [ ])
+      ++ (with pkgs; [
+        libdrm
+        fcft
+      ])
+      ++ [ wlroots ];
     inherit patches;
     postPatch =
       let
