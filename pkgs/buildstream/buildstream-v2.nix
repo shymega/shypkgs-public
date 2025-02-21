@@ -6,6 +6,7 @@
   bubblewrap,
   fuse3,
   lib,
+  pkgs,
 }: let
   inherit (python3Packages) buildPythonApplication buildPythonPackage;
   # FIXME: Upstream `pyroaring` to Nixpkgs .
@@ -29,6 +30,7 @@
       platforms = lib.platforms.linux;
     };
   };
+  buildbox = pkgs.callPackage ../buildbox {};
 in
   buildPythonApplication rec {
     pname = "buildstream";
@@ -62,6 +64,7 @@ in
       lzip
       patch
       python3Packages.cython
+      buildbox
     ];
 
     nativeBuildInputs = with python3Packages;
