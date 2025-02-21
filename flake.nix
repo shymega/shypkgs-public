@@ -89,13 +89,14 @@
         arch-test
         bst-to-lorry
         buildbox
-        buildstream1
+        buildstream
         buildstream2
         dwl
         email-gitsync
         git-wip
         is-net-metered
         isync-exchange-patched
+        mutt2task
         wl-share-screen
         wl-share-screen-stop
         wm-menu
