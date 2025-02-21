@@ -7,7 +7,6 @@ with pkgs;
   {
     email-gitsync = callPackage ./email-gitsync {};
     isync-exchange-patched = callPackage ./isync-exchange-patched {};
-    offlineimap-patched = callPackage ./offlineimap-patched {};
   }
   // lib.optionalAttrs (lib.hasSuffix "-linux" pkgs.system) {
     dwl = callPackage ./dwl {inherit inputs pkgs;};
