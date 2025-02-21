@@ -9,9 +9,10 @@
     propagatedBuildInputs =
       oldAttrs.propagatedBuildInputs
       ++ (with pkgs.python3Packages; [
-        tomlkit
         dulwich
+        packaging
         requests
+        tomlkit
       ]);
   });
 in
