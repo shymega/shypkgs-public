@@ -22,4 +22,17 @@ with pkgs;
     buildstream2 = buildstream;
     bst-to-lorry = callPackage ./bst-to-lorry {inherit buildstream2;};
     arch-test = callPackage ./arch-test {inherit inputs;};
+    raindrop = callPackage ./raindrop {};
+    buildstream-source-api-patched = buildstream.overrideAttrs (oldAttrs: rec {
+      inherit (oldAttrs) version pname src;
+
+      patches =
+        (oldAttrs.patches or [])
+        ++ [
+          (pkgs.fetchpatch {
+            url = "https://patch-diff.githubusercontent.com/raw/apache/buildstream/pull/1997.patch?full_index=1";
+            hash = "sha256-2aMrlEG0jp16n4YPizXvEnxBHUDWd5QobBbifHeOCTA=";
+          })
+        ];
+    });
   }
