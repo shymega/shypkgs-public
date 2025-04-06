@@ -27,11 +27,10 @@
 
     allSystems = [
       "x86_64-linux"
-      "i686-linux"
       "x86_64-darwin"
       "aarch64-linux"
-      "armv6l-linux"
-      "armv7l-linux"
+      "aarch64-darwin"
+      "riscv64-linux"
     ];
     systems = [
       "x86_64-linux"
@@ -48,6 +47,7 @@
         }"
     );
   in {
+    inherit forAllSystems allSystems;
     packages = forAllSystems (
       system: let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -90,6 +90,7 @@
         bst-to-lorry
         buildbox
         buildstream
+        buildstream-source-api-patched
         buildstream2
         dwl
         email-gitsync

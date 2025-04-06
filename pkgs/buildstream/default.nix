@@ -33,12 +33,12 @@
 in
   buildPythonApplication rec {
     pname = "buildstream";
-    version = "2.4.0";
+    version = "2.4.1";
     pyproject = true;
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-dj25ELy/79ouN8zRHvoSxX2XNdOgN5BNdbEiditIAro=";
+      hash = "sha256-crjsC66S4L42dejUQQ+i9j4+W68JF9Dn6kezaN3EZF8=";
     };
 
     build-system = with python3Packages; [setuptools];
