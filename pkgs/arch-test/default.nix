@@ -5,7 +5,7 @@
   lib,
   buildPPC64 ? true,
   buildArm64 ? true,
-  buildM68k ? true,
+  buildM68k ? false,
   buildMips ? true,
   buildRiscv64 ? true,
   buildRiscv32 ? true,
