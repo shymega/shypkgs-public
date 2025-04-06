@@ -6,17 +6,13 @@
     ./dwl-patches/focusdirection.patch
   ],
   cmd ? {
-    terminal = pkgs.lib.getExe pkgs.alacritty;
-    menu = pkgs.lib.getExe (pkgs.callPackage ../wm-menu {});
+    terminal = with pkgs; with lib; getExe alacritty;
+    menu = with pkgs; with lib; getExe (callPackage ../wm-menu {});
   },
   ...
 }:
 (pkgs.dwl.override {
   enableXWayland = true;
-  # wayland = wayland-git;
-  # wayland-protocols = wayland-protocols-git;
-  # inherit wlroots;
-  # wayland-scanner = wayland-scanner-git;
   configH = ./config.h;
 })
 .overrideAttrs
