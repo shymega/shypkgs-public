@@ -21,5 +21,7 @@ jobs:
         with:
           name: shypkgs
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake path:"$GITHUB_WORKSPACE"
+      - run: nix build --impure github:srid/devour-flake -L --no-link --print-out-paths --override-input flake path:"$GITHUB_WORKSPACE"
+        env:
+          NIXPKGS_ALLOW_UNFREE: 1
       - run: nix-shell -p bash --run "echo OK"
