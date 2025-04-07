@@ -13,7 +13,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixfigs-helpers.url = "github:shymega/nixfigs-helpers";
   };
@@ -88,10 +88,7 @@
         (self.packages.${final.system})
         arch-test
         bst-to-lorry
-        buildbox
-        buildstream
         buildstream-source-api-patched
-        buildstream2
         dwl
         email-gitsync
         git-wip
@@ -102,6 +99,7 @@
         wl-share-screen-stop
         wm-menu
         ;
+      inherit (inputs.nixpkgs.legacyPackages.${final.system}) buildbox buildstream;
     };
   };
 }

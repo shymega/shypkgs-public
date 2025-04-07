@@ -2,7 +2,7 @@
   lib,
   fetchFromGitLab,
   python3Packages,
-  buildstream2,
+  buildstream,
 }: let
   inherit (python3Packages) buildPythonApplication;
 in
@@ -24,7 +24,7 @@ in
     ];
 
     propagatedBuildInputs = [
-      buildstream2
+      buildstream
       python3Packages.pyyaml
     ];
 
