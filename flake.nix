@@ -82,23 +82,12 @@
       allowBroken = true;
       allowInsecurePredicate = _: true;
     };
-    overlays.default = final: _: {
-      inherit
-        (self.packages.${final.system})
-        arch-test
-        bst-to-lorry
-        buildstream-source-api-patched
-        dwl
-        email-gitsync
-        git-wip
-        is-net-metered
-        isync-exchange-patched
-        mutt2task
-        wl-share-screen
-        wl-share-screen-stop
-        wm-menu
-        ;
-      inherit (inputs.nixpkgs.legacyPackages.${final.system}) buildbox buildstream;
-    };
+    overlays.default = final: prev:
+      import ./pkgs {
+        pkgs = prev;
+        system = final.system;
+        inherit inputs;
+      }
+      // {inherit (inputs.nixpkgs.legacyPackages.${final.system}) buildbox buildstream;};
   };
 }
