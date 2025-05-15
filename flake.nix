@@ -85,7 +85,7 @@
     overlays.default = final: prev:
       import ./pkgs {
         pkgs = prev;
-        system = final.system;
+        inherit (final) system;
         inherit inputs;
       }
       // {inherit (inputs.nixpkgs.legacyPackages.${final.system}) buildbox buildstream;};
