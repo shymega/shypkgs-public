@@ -24,7 +24,7 @@ with pkgs;
         ++ [
           (pkgs.fetchpatch {
             url = "https://patch-diff.githubusercontent.com/raw/apache/buildstream/pull/1997.patch?full_index=1";
-            hash = "sha256-DSTCqEqNEF5F/tXLoZyopD9ooV1B8V0J9rVmGw2UrW0=";
+            hash = "sha256-AivduXZfc8IeOcZq+Py1K8AQGnepFQqcnXP5/1q+CpE=";
           })
         ];
     });
