@@ -82,12 +82,12 @@
       allowBroken = true;
       allowInsecurePredicate = _: true;
     };
-    overlays.default = final: prev:
-      import ./pkgs {
-        pkgs = prev;
-        inherit (final) system;
-        inherit inputs;
+    overlays.default = final: _prev: let
+      inherit (final) system;
+    in
+      {
+        inherit (self.packages) system;
       }
-      // {inherit (inputs.nixpkgs.legacyPackages.${final.system}) buildbox buildstream;};
+      // {inherit (inputs.nixpkgs.legacyPackages.${system}) buildbox buildstream;};
   };
 }
