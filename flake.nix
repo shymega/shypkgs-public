@@ -82,12 +82,19 @@
       allowBroken = true;
       allowInsecurePredicate = _: true;
     };
-    overlays.default = final: _prev: let
-      inherit (final) system;
+    overlays.default = _final: prev: let
+      pkgAttrs = import ./pkgs {
+        pkgs = prev;
+        inherit inputs;
+      };
+      nameValuePair = n: v: {
+        name = n;
+        value = v;
+      };
     in
-      {
-        inherit (self.packages) system;
-      }
-      // {inherit (inputs.nixpkgs.legacyPackages.${system}) buildbox buildstream;};
+      builtins.listToAttrs (map
+        (n: nameValuePair n pkgAttrs.${n})
+        (builtins.attrNames pkgAttrs))
+      // {inherit (inputs.nixpkgs.legacyPackages.${prev.system}) buildbox buildstream;};
   };
 }
