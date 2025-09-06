@@ -14,8 +14,8 @@ in
     src = fetchFromGitLab {
       owner = "CodethinkLabs/lorry";
       repo = "bst-to-lorry";
-      rev = "e1734575d7333406056aeaef739099588125fb7c";
-      hash = "sha256-vQnMqj5Woi7xpLrFNFXMVoJBKCT096TnLSlecRm1YMk=";
+      rev = "ae669801844572133557f882c885a12b366daca8";
+      hash = "sha256-0Lldxz3aZ7BEY1yLDP5jUIxmP+h7CI23FSNHfN2o6HA=";
     };
 
     build-system = with python3Packages; [
@@ -28,9 +28,8 @@ in
       python3Packages.pyyaml
     ];
 
-    doCheck = false;
-
     meta = {
+      maintainers = with lib.maintainers; [shymega];
       platforms = lib.platforms.linux;
       mainProgram = "bst-to-lorry";
     };
