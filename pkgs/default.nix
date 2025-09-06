@@ -18,14 +18,4 @@ with pkgs;
     wl-screen-share = callPackage ./wl-share-screen {};
     wl-screen-share-stop = callPackage ./wl-share-screen-stop {};
     bst-to-lorry = callPackage ./bst-to-lorry {};
-    buildstream-source-api-patched = pkgs.buildstream.overrideAttrs (oldAttrs: {
-      patches =
-        (oldAttrs.patches or [])
-        ++ [
-          (pkgs.fetchpatch {
-            url = "https://patch-diff.githubusercontent.com/raw/apache/buildstream/pull/1997.patch?full_index=1";
-            hash = "sha256-AivduXZfc8IeOcZq+Py1K8AQGnepFQqcnXP5/1q+CpE=";
-          })
-        ];
-    });
   }
