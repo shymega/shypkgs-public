@@ -1,6 +1,6 @@
 {
   inputs,
-  system,
+  hostPlatform,
   ...
 }: {
   config,
@@ -9,10 +9,10 @@
   ...
 }:
 with lib;
-assert lib.hasSuffix "-linux" system; let
+assert lib.hasSuffix "-linux" hostPlatform; let
   cfg = config.programs.dwl;
   dwlPkg = import ../../../pkgs/dwl {
-    inherit pkgs inputs system;
+    inherit pkgs inputs hostPlatform;
     inherit (cfg) patches cmd;
   };
 in {
