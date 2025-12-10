@@ -1,7 +1,7 @@
 {
-  system,
+  hostPlatform,
   inputs,
 }: {
-  hmModules = import ./home-manager {inherit inputs system;};
-  nixosModules = import ./nixos {inherit inputs system;};
+  hmModules = import ./home-manager {inherit inputs hostPlatform;};
+  nixosModules = import ./nixos {inherit inputs hostPlatform;};
 }
