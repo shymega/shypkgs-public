@@ -18,4 +18,5 @@ with pkgs;
     wl-screen-share = callPackage ./wl-share-screen {};
     wl-screen-share-stop = callPackage ./wl-share-screen-stop {};
     bst-to-lorry = callPackage ./bst-to-lorry {};
+    arch-test = callPackage ./arch-test {};
   }
