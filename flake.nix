@@ -51,10 +51,18 @@
       system: let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
       in
-        import ./pkgs {inherit system inputs pkgs;}
+        import ./pkgs {inherit inputs pkgs;}
     );
-    nixosModules = forAllSystems (system: (import ./modules {inherit system inputs;}).nixosModules);
-    hmModules = forAllSystems (system: (import ./modules {inherit system inputs;}).hmModules);
+    nixosModules = forAllSystems (system:
+      (import ./modules {
+        inherit inputs;
+        hostPlatform = system;
+      }).nixosModules);
+    hmModules = forAllSystems (system:
+      (import ./modules {
+        inherit inputs;
+        hostPlatform = system;
+      }).hmModules);
 
     # for `nix fmt`
     formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
