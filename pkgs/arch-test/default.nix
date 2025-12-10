@@ -3,12 +3,12 @@
   stdenv,
   fetchFromGitHub,
   lib,
-  buildPPC64 ? true,
+  buildPPC64 ? false,
   buildArm64 ? true,
   buildM68k ? false,
-  buildMips ? true,
-  buildRiscv64 ? true,
-  buildRiscv32 ? true,
+  buildMips ? false,
+  buildRiscv64 ? false,
+  buildRiscv32 ? false,
   buildAmd64 ? true,
   ...
 }: let
@@ -52,14 +52,14 @@ in
     };
 
     dontConfigure = true;
-    dontBuild = true;
 
     installPhase = ''
       mkdir -p $out/bin
+      ls .
       echo 'echo noop' > $out/bin/arch-test
     '';
 
-    nativeBuildInputs = pkgsCross;
+    buildInputs = pkgsCross;
 
     makeFlags = let
       inherit (lib.strings) trim;
