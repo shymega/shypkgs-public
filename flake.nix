@@ -44,50 +44,68 @@
           inputs.nixfigs-helpers.helpers.formatter
         }"
     );
-  in {
-    inherit forAllSystems allSystems;
-    packages = forAllSystems (
-      system: let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
-        import ./pkgs {inherit inputs pkgs;}
-    );
-    nixosModules = forAllSystems (system:
-      (import ./modules {
-        inherit inputs;
-        hostPlatform = system;
-      }).nixosModules);
-    hmModules = forAllSystems (system:
-      (import ./modules {
-        inherit inputs;
-        hostPlatform = system;
-      }).hmModules);
+  in
+    {
+      inherit forAllSystems allSystems;
+      packages = forAllSystems (
+        system: let
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+        in
+          import ./pkgs {inherit inputs pkgs;}
+      );
+      nixosModules = forAllSystems (system:
+        (import ./modules {
+          inherit inputs;
+          hostPlatform = system;
+        }).nixosModules);
+      hmModules = forAllSystems (system:
+        (import ./modules {
+          inherit inputs;
+          hostPlatform = system;
+        }).hmModules);
 
-    # for `nix fmt`
-    formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
-    # for `nix flake check`
-    checks =
-      treeFmtEachSystem (pkgs: {
-        formatting = treeFmtEval.${pkgs}.config.build.wrapper;
-      })
-      // forEachSystem (system: {
-        pre-commit-check = import "${inputs.nixfigs-helpers.helpers.checks}" {
-          inherit self system;
-          inherit (inputs.nixfigs-helpers) inputs;
-          inherit (inputs.nixpkgs) lib;
-        };
-      });
-    devShells = forEachSystem (
-      system: let
-        pkgs = genPkgs system;
-      in
-        import inputs.nixfigs-helpers.helpers.devShells {inherit pkgs self system;}
-    );
-    nixpkgs-config = {
-      allowUnfree = true;
-      allowUnsupportedSystem = true;
-      allowBroken = true;
-      allowInsecurePredicate = _: true;
+      # for `nix fmt`
+      formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
+      # for `nix flake check`
+      checks =
+        treeFmtEachSystem (pkgs: {
+          formatting = treeFmtEval.${pkgs}.config.build.wrapper;
+        })
+        // forEachSystem (system: {
+          pre-commit-check = import "${inputs.nixfigs-helpers.helpers.checks}" {
+            inherit self system;
+            inherit (inputs.nixfigs-helpers) inputs;
+            inherit (inputs.nixpkgs) lib;
+          };
+        });
+      devShells = forEachSystem (
+        system: let
+          pkgs = genPkgs system;
+        in
+          import inputs.nixfigs-helpers.helpers.devShells {inherit pkgs self system;}
+      );
+      nixpkgs-config = {
+        allowUnfree = true;
+        allowUnsupportedSystem = true;
+        allowBroken = true;
+        allowInsecurePredicate = _: true;
+      };
+    }
+    // {
+      overlays.default = _final: prev: {
+        inherit
+          (self.packages.${prev.stdenv.hostPlatform.system})
+          bst-to-lorry
+          dwl
+          email-gitsync
+          git-wip
+          is-net-metered
+          mutt2task
+          wifi-qr
+          wl-share-screen
+          wl-share-screen-stop
+          wm-menu
+          ;
+      };
     };
-  };
 }
