@@ -1,22 +1,21 @@
 {
   pkgs,
   inputs,
+  lib ? inputs.nixpkgs.lib,
   ...
 }:
-with pkgs;
   {
-    email-gitsync = callPackage ./email-gitsync {};
-    isync-exchange-patched = callPackage ./isync-exchange-patched {};
-    git-wip = callPackage ./git-wip {};
-    mutt2task = callPackage ./mutt2task {};
+    email-gitsync = pkgs.callPackage ./email-gitsync {};
+    isync-exchange-patched = pkgs.callPackage ./isync-exchange-patched {};
+    git-wip = pkgs.callPackage ./git-wip {};
+    mutt2task = pkgs.callPackage ./mutt2task {};
   }
   // lib.optionalAttrs pkgs.stdenv.isLinux {
-    dwl = callPackage ./dwl {inherit inputs pkgs;};
-    is-net-metered = callPackage ./is-net-metered {};
-    wm-menu = callPackage ./wm-menu {};
-    # wifi-qr = callPackage ./wifi-qr {};
-    wl-screen-share = callPackage ./wl-share-screen {};
-    wl-screen-share-stop = callPackage ./wl-share-screen-stop {};
-    bst-to-lorry = callPackage ./bst-to-lorry {};
-    arch-test = callPackage ./arch-test {};
+    dwl = pkgs.callPackage ./dwl {inherit inputs pkgs;};
+    is-net-metered = pkgs.callPackage ./is-net-metered {};
+    wm-menu = pkgs.callPackage ./wm-menu {};
+    wl-screen-share = pkgs.callPackage ./wl-share-screen {};
+    wl-screen-share-stop = pkgs.callPackage ./wl-share-screen-stop {};
+    bst-to-lorry = pkgs.callPackage ./bst-to-lorry {};
+    arch-test = pkgs.callPackage ./arch-test {};
   }
