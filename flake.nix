@@ -21,7 +21,6 @@
     genPkgs = system:
       import inputs.nixpkgs {
         inherit system;
-        overlays = builtins.attrValues self.overlays;
         config = self.nixpkgs-config;
       };
 
@@ -90,12 +89,5 @@
       allowBroken = true;
       allowInsecurePredicate = _: true;
     };
-    overlays.default = _final: prev: let
-      pkgAttrs = import ./pkgs {
-        pkgs = prev;
-        inherit inputs;
-      };
-    in
-      pkgAttrs // {inherit (inputs.nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}) buildbox buildstream;};
   };
 }
