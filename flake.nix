@@ -95,14 +95,7 @@
         pkgs = prev;
         inherit inputs;
       };
-      nameValuePair = n: v: {
-        name = n;
-        value = v;
-      };
     in
-      builtins.listToAttrs (map
-        (n: nameValuePair n pkgAttrs.${n})
-        (builtins.attrNames pkgAttrs))
-      // {inherit (inputs.nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}) buildbox buildstream;};
+      pkgAttrs // {inherit (inputs.nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}) buildbox buildstream;};
   };
 }
