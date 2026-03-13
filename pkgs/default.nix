@@ -6,7 +6,6 @@
 }:
   {
     email-gitsync = pkgs.callPackage ./email-gitsync {};
-    isync-exchange-patched = pkgs.callPackage ./isync-exchange-patched {};
     git-wip = pkgs.callPackage ./git-wip {};
     mutt2task = pkgs.callPackage ./mutt2task {};
   }
