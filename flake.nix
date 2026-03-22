@@ -92,20 +92,6 @@
       };
     }
     // {
-      overlays.default = _final: prev: {
-        inherit
-          (self.packages.${prev.stdenv.hostPlatform.system})
-          bst-to-lorry
-          dwl
-          email-gitsync
-          git-wip
-          is-net-metered
-          mutt2task
-          wifi-qr
-          wl-share-screen
-          wl-share-screen-stop
-          wm-menu
-          ;
-      };
+      overlays.default = _: prev: self.packages.${prev.stdenv.hostPlatform.system};
     };
 }
