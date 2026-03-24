@@ -92,6 +92,6 @@
       };
     }
     // {
-      overlays.default = _: prev: self.packages.${prev.stdenv.hostPlatform.system};
+      overlays.default = _: prev: self.packages.${prev.stdenv.hostPlatform.system} or {};
     };
 }
