@@ -13,6 +13,8 @@
   # arch-test = pkgs.callPackage ./arch-test {};
   bst-to-lorry = pkgs.callPackage ./bst-to-lorry {};
   dwl = pkgs.callPackage ./dwl {inherit inputs pkgs;};
+  hyprland-cursor-lock = pkgs.callPackage ./hyprland-cursor-lock {};
+  hyprscope = pkgs.callPackage ./hyprscope {};
   is-net-metered = pkgs.callPackage ./is-net-metered {};
   wl-screen-share = pkgs.callPackage ./wl-share-screen {};
   wl-screen-share-stop = pkgs.callPackage ./wl-share-screen-stop {};
