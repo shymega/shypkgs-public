@@ -1,4 +1,6 @@
 {
+  lib,
+  hyprland,
   fetchFromGitLab,
   rustPlatform,
 }:
@@ -15,4 +17,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
   };
 
   cargoHash = "sha256-qQJOi2AZfKAl+JCDUQniSh0c1aH9ofM8Jrg54bqIvQo=";
+
+  meta = with lib; {
+    maintainers = with maintainers; [shymega];
+    mainProgram = finalAttrs.pname;
+    platforms = hyprland.meta.platforms;
+  };
 })
