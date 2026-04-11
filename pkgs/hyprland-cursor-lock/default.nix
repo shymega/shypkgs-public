@@ -21,6 +21,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   meta = with lib; {
     maintainers = with maintainers; [shymega];
     mainProgram = finalAttrs.pname;
-    platforms = hyprland.meta.platforms;
+    inherit (hyprland.meta) platforms;
   };
 })
