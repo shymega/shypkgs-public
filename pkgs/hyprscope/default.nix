@@ -24,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   meta = with lib; {
     maintainers = with maintainers; [shymega];
-    mainProgram = finalAtrs.pname;
-    platforms = hyprland.meta.platforms;
+    mainProgram = finalAttrs.pname;
+    inherit (hyprland.meta) platforms;
   };
 })
