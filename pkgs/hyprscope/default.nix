@@ -1,5 +1,6 @@
 {
   lib,
+  hyprland,
   fetchFromGitHub,
   stdenv,
 }:
@@ -23,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   meta = with lib; {
     maintainers = with maintainers; [shymega];
-    mainProgram = "hyprscope";
-    platforms = with platforms; unix;
+    mainProgram = finalAtrs.pname;
+    platforms = hyprland.meta.platforms;
   };
 })
