@@ -40,14 +40,14 @@
 
   version = "0.21";
 in
-  stdenv.mkDerivation {
+  stdenv.mkDerivation (finalAttrs: {
     name = "arch-test";
     inherit version;
 
     src = fetchFromGitHub {
       owner = "kilobyte";
       repo = "arch-test";
-      rev = "v${version}";
+      rev = "v${finalAttrs.version}";
       hash = "sha256-3+3vWrrMfQlIlxQM6J/oAIVpy4JeLVjqnyMOBzk/a30=";
     };
 
@@ -69,7 +69,7 @@ in
 
     meta = {
       maintainers = with lib.maintainers; [shymega];
-      mainProgram = "arch-test";
+      mainProgram = finalAttrs.name;
       platforms = with lib.platforms; linux;
     };
-  }
+  })
