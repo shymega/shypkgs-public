@@ -30,7 +30,7 @@ in
 
     meta = {
       maintainers = with lib.maintainers; [shymega];
-      platforms = lib.platforms.linux;
-      mainProgram = "bst-to-lorry";
+      inherit (buildstream.meta) platforms;
+      mainProgram = pname;
     };
   }
