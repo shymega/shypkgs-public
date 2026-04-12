@@ -1,18 +1,19 @@
 {
   lib,
+  git,
   fetchFromGitHub,
   stdenv,
   wipPrefix ? null,
 }: let
   inherit (stdenv) mkDerivation;
-  pname = "git-wip";
-  version = "unstable";
 in
-  mkDerivation {
-    inherit pname version;
+  mkDerivation (finalAttrs: {
+    pname = "git-wip";
+    version = "unstable";
+
     src = fetchFromGitHub {
       owner = "bartman";
-      repo = "git-wip";
+      repo = finalAttrs.pname;
       rev = "33c8f946ca21432aa5e45f355b87b0d6c33ce734";
       hash = "sha256-Kq8yDVurV9D6gfNSReSRjjsbsZVpxBOU9rIiM5OKPV0=";
     };
@@ -33,7 +34,7 @@ in
     '';
     meta = with lib; {
       maintainers = with maintainers; [shymega];
-      mainProgram = "git-wip";
-      platforms = with platforms; unix;
+      mainProgram = finalAttrs.pname;
+      inherit (git.meta) platforms;
     };
-  }
+  })

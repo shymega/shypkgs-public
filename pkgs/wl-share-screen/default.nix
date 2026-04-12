@@ -1,26 +1,26 @@
 {
   lib,
+  sway,
+  wl-mirror,
+  jq,
   writeShellApplication,
   bash,
-  pkgs,
 }: let
   inherit (lib) getExe getExe';
-  swaymsg = getExe' pkgs.sway "swaymsg";
-  wl-mirror = getExe' pkgs.wl-mirror "wl-mirror";
-  jq = getExe pkgs.jq;
+  swaymsg = getExe' sway "swaymsg";
 in
-  writeShellApplication {
+  writeShellApplication rec {
     name = "wl-screen-share";
 
     text = ''
 
-        #!/usr/bin/env ${lib.getExe bash}
+      #!/usr/bin/env ${lib.getExe bash}
 
       # Step 1: Create a new output
       ${swaymsg} create_output
 
       # Step 2: Find the name of the newly created output
-      NEW_OUTPUT=$(${swaymsg} -t get_outputs | ${jq} -r '.[] | select(.name | startswith("HEADLESS-")) | .name' | sort | tail -n 1)
+      NEW_OUTPUT=$(${swaymsg} -t get_outputs | ${getExe jq} -r '.[] | select(.name | startswith("HEADLESS-")) | .name' | sort | tail -n 1)
 
       # Check if the output was successfully created
       if [ -z "$NEW_OUTPUT" ]; then
@@ -42,12 +42,14 @@ in
       ${swaymsg} workspace sshr
       ${swaymsg} workspace "$CURRENT_WORKSPACE"
 
-      ${wl-mirror} "$NEW_OUTPUT"
+      ${getExe' wl-mirror "wl-mirror"} "$NEW_OUTPUT"
 
       echo "Created new output $NEW_OUTPUT."
     '';
 
     meta = {
       maintainers = with lib.maintainers; [shymega];
+      inherit (wl-mirror.meta) platforms;
+      mainProgram = name;
     };
   }

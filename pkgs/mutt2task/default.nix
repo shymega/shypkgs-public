@@ -1,5 +1,6 @@
 {
   lib,
+  mutt,
   fetchFromGitHub,
   python3Packages,
 }: let
@@ -21,7 +22,7 @@ in
 
       meta = with lib; {
         maintainers = with maintainers; [shymega];
-        mainProgram = "mutt2task";
-        platforms = with platforms; unix;
+        mainProgram = pname;
+        inherit (mutt.meta) platforms;
       };
     }
