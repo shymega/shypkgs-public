@@ -13,7 +13,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixfigs-helpers.url = "github:shymega/nixfigs-helpers";
   };
