@@ -136,11 +136,19 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
+<<<<<<< HEAD
+        "lastModified": 1783379217,
+        "narHash": "sha256-Sztz4Arv+3ilPr0A7Z09km3qWTP995dHh/xQMVrgA+0=",
+        "owner": "shymega",
+        "repo": "nixfigs-helpers",
+        "rev": "a37e3a5bf64bd55cc7392b426aac2cbd806d2ddf",
+=======
         "lastModified": 1783360640,
         "narHash": "sha256-a9KhNyTc4tJ8xxIbwYYiuxail8GVntMA1eeuuZMB8SI=",
         "owner": "shymega",
         "repo": "nixfigs-helpers",
         "rev": "b3d4c5bf65656c89a205660216ff6fa6b43f0779",
+>>>>>>> e37b2c0 (chore: Update Flake inputs)
         "type": "github"
       },
       "original": {
@@ -165,11 +173,19 @@
     },
     "nixpkgs-master": {
       "locked": {
+<<<<<<< HEAD
+        "lastModified": 1783376703,
+        "narHash": "sha256-Sldl/lAlJdmTt9+OLL14ntMYz3eW4lA/FVMxYQWDRr8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9600ca6f94bd53335ce7c6a9a88446b2beac3dc8",
+=======
         "lastModified": 1783358775,
         "narHash": "sha256-R91swHFQwbrkjo9EWamkwttNGlqPC2Fakg4ywBm0cV0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "03b1e08697269d34dd1074ddc429555f77416f46",
+>>>>>>> e37b2c0 (chore: Update Flake inputs)
         "type": "github"
       },
       "original": {
