@@ -2,8 +2,6 @@
   pkgs,
   patches ? [
     ./dwl-patches/attachbottom.patch
-    ./dwl-patches/vanitygaps.patch
-    ./dwl-patches/focusdirection.patch
   ],
   cmd ? {
     terminal = with pkgs; with lib; getExe alacritty;
@@ -16,18 +14,18 @@
   configH = ./config.h;
 })
 .overrideAttrs
-(oldAttrs: rec {
-  version = "0.7";
+(finalAttrs: prevAttrs: {
+  version = "0.8";
   src = pkgs.fetchFromGitea {
     domain = "codeberg.org";
     owner = "dwl";
     repo = "dwl";
-    rev = "v${version}";
-    hash = "sha256-7SoCITrbMrlfL4Z4hVyPpjB9RrrjLXHP9C5t1DVXBBA=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-J76L5ZOCYgfcY08wH5cSLG+UdgDrv50lQyEnJNqDkXI=";
   };
   buildInputs =
-    oldAttrs.buildInputs or [];
-  inherit patches;
+    prevAttrs.buildInputs or [];
+  patches = (prevAttrs.patches or []) ++ patches;
   postPatch = let
     configFile = ./config.def.h;
   in ''
