@@ -47,7 +47,7 @@ in
     src = fetchFromGitHub {
       owner = "kilobyte";
       repo = "arch-test";
-      rev = "v${finalAttrs.version}";
+      tag = "v${finalAttrs.version}";
       hash = "sha256-3+3vWrrMfQlIlxQM6J/oAIVpy4JeLVjqnyMOBzk/a30=";
     };
 
