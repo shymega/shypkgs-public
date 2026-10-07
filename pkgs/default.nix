@@ -12,6 +12,9 @@
 // lib.optionalAttrs pkgs.stdenv.isLinux {
   # arch-test = pkgs.callPackage ./arch-test {};
   bst-to-lorry = pkgs.callPackage ./bst-to-lorry {};
+  displaylink = pkgs.callPackage ./displaylink {
+    inherit (pkgs.linuxPackages) evdi;
+  };
   dwl = pkgs.callPackage ./dwl {inherit inputs pkgs;};
   hyprland-cursor-lock = pkgs.callPackage ./hyprland-cursor-lock {};
   hyprscope = pkgs.callPackage ./hyprscope {};
