@@ -1,0 +1,28 @@
+name: "Update DisplayLink package"
+on:
+  schedule:
+    - cron: "0 0 * * 5"
+  workflow_dispatch: {}
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: bash pkgs/displaylink/update.sh
+      - run: nix build --impure --no-link '.#displaylink' -L
+        env:
+          NIXPKGS_ALLOW_UNFREE: 1
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(displaylink): update to latest upstream version"
+          title: "chore(displaylink): update to latest upstream version"
+          branch: update-displaylink
+          delete-branch: true
+          add-paths: pkgs/displaylink/default.nix
