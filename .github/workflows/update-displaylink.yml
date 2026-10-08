@@ -19,7 +19,7 @@ jobs:
       - run: nix build --impure --no-link '.#displaylink' -L
         env:
           NIXPKGS_ALLOW_UNFREE: 1
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "chore(displaylink): update to latest upstream version"
           title: "chore(displaylink): update to latest upstream version"
