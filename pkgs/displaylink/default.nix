@@ -72,7 +72,7 @@ in
     meta = {
       description = "DL-7xxx, DL-6xxx, DL-5xxx, DL-41xx and DL-3x00 Driver for Linux";
       homepage = "https://www.displaylink.com/";
-      license = lib.licenses.unfree;
+      license = lib.licenses.asl20;
       mainProgram = "DisplayLinkManager";
       maintainers = [];
       platforms = [
@@ -80,6 +80,5 @@ in
         "i686-linux"
         "aarch64-linux"
       ];
-      sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
     };
   })
