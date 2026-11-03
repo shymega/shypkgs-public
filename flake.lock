@@ -121,11 +121,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1793743376,
+        "lastModified": 1793909886,
         "narHash": "sha256-Xoit6a8y4NzpUxRpEca4SzN2l+yhTb+/yfeoWdWMhos=",
         "owner": "shymega",
         "repo": "nixfigs-helpers",
-        "rev": "b5386581cdfeddece8a08fb8e80d37efd7c900c7",
+        "rev": "8c404addea7dbdd2aeb24bbb9033e0fefd1dde4d",
         "type": "github"
       },
       "original": {
@@ -150,11 +150,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1793742257,
-        "narHash": "sha256-4sfVGJ8mL2VktEtres1tN/0a7Krfo5c7eiJV/RJe6Js=",
+        "lastModified": 1793908512,
+        "narHash": "sha256-XUTHDXUWlORrJYPQ2/to4H7MmSgiLykva9jhpSLuB5Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "597f8f84c2b37fe825a7579066d7cd26b461aa00",
+        "rev": "a340c984a9dd5abf1ca1924dfda288e183ba9685",
         "type": "github"
       },
       "original": {
