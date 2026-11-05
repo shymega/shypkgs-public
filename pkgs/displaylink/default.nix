@@ -25,13 +25,13 @@
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "displaylink";
-    version = "6.2.0-30";
+    version = "6.4.0-22";
 
     # Fetched directly from Synaptics' download page; keep in sync with
     # ./update.sh, which rewrites url/hash/version together.
     src = fetchurl {
-      url = "https://www.synaptics.com/sites/default/files/exe_files/2025-09/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu6.2-EXE.zip";
-      hash = "sha256-JQO7eEz4pdoPkhcn9tIuy5R4KyfsCniuw6eXw/rLaYE=";
+      url = "https://www.synaptics.com/sites/default/files/exe_files/2026-10/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu6.4-EXE.zip";
+      hash = "sha256-fhqB0hlKQLIN5wTLOEbWbL+x54N+MN4jRVcpuhTwKW0=";
     };
 
     nativeBuildInputs = [
