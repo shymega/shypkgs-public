@@ -41,7 +41,7 @@ in
 
     unpackPhase = ''
       runHook preUnpack
-      unzip $src
+      unzip -j $src
       chmod +x displaylink-driver-${finalAttrs.version}.run
       ./displaylink-driver-${finalAttrs.version}.run --target . --noexec --nodiskspace
       runHook postUnpack
