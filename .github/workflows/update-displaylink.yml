@@ -29,3 +29,4 @@ jobs:
           branch: update-displaylink
           delete-branch: true
           add-paths: pkgs/displaylink/default.nix
+          assignees: shymega
