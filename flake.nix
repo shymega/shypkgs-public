@@ -14,7 +14,7 @@
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-master.url = "github:NixOS/nixpkgs?ref=master";
     nixfigs-helpers = {
       url = "github:shymega/nixfigs-helpers";
       inputs.nixpkgs.follows = "nixpkgs";
